@@ -1,0 +1,23 @@
+<%= form_for @vendor do |f| %>
+
+  <%= f.error_messages %>
+
+  <%= f.label :name%>
+  <%= f.text_field :name%>
+
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+
+  <%= f.label :contact_person %>
+  <%= f.text_field :contact_person %>
+
+  <%= f.label :contact_email %>
+  <%= f.text_field :contact_email %>
+
+  <%= f.label :additional_info %>
+  <%= f.text_field :additional_info %>
+
+  <%= f.submit "#{name_of_button} Vendor" %>
+  <%= link_to "Cancel", vendors_path %>
+
+<%end%>

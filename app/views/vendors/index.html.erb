@@ -1,0 +1,15 @@
+<h1>Brad and Katie's Wedding Info</h1>
+
+<%= link_to "New Vendor", new_vendor_path(@vendor)  %><br>
+
+<% @vendors.each do |vendor| %>
+
+  <%= link_to vendor.name, vendor_path(vendor) %>
+  <%= vendor.phone_number %>
+  <%= vendor.contact_person %>
+  <%= vendor.contact_email %>
+  <%= vendor.additional_info %>
+
+  <%= link_to 'EDIT', vendor_path(vendor) %>
+
+<%end%>
