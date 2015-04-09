@@ -1,0 +1,5 @@
+<%= link_to "New Quote", new_vendor_budget_path(@vendor) %>
+<% current_user.budgets.each do |budget| %>
+  <%= budget.vendor.name %>
+  <%= budget.total_due %>
+<% end %>

@@ -1,0 +1,10 @@
+<%= form_for ([@vendor, @budget]) do |f| %>
+
+  <%= f.label :total_due %>
+  <%= f.number_field :total_due %>
+
+  <%= f.submit "#{name_of_button} Quote" %>
+
+<% end %>
+
+<%= link_to "Cancel", budgets_path, class: 'btn btn-default' %>

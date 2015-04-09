@@ -6,3 +6,19 @@
   <%= @vendor.additional_info %><br>
 
 <%= link_to 'Edit', edit_vendor_path(@vendor), class: 'btn btn-info'%> <%= link_to 'Delete', vendor_path(@vendor), method: :delete, class: 'btn btn-danger' %> <%= link_to 'Back', vendors_path %>
+
+<%= link_to "Add Quote", new_vendor_budget_path(@vendor) %>
+<% if @vendor.budgets %>
+  <% @vendor.budgets.each do |quote| %>
+    <%= link_to "#{quote.total_due}", vendor_budget_path(vendor_id:quote.vendor_id, id:quote.id) %>
+  <% end %>
+<% end %>
+
+
+<% if @vendor.name && @vendor.name == 'Love in Bloom' %>
+  <div class= "text-center">
+    <a data-pin-do="embedBoard" href="http://www.pinterest.com/katie1pekarek/love-in-bloom/" data-pin-scale-width="200" data-pin-scale-height="420" data-pin-board-width="600">Follow Katie Pekarek's board Wedding Flowers on Pinterest.</a>
+    <!-- Please call pinit.js only once per page -->
+    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+  </div>
+<% end %>

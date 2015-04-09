@@ -1,4 +1,5 @@
 class VendorsController <ApplicationController
+  before_action :set_user
 
   def index
     @vendors = Vendor.all
@@ -52,5 +53,8 @@ class VendorsController <ApplicationController
     params.require(:vendor).permit(:name, :phone_number, :contact_person, :contact_email, :additional_info)
   end
 
+  def set_user
+    @user = current_user
+  end
 
 end

@@ -1,0 +1,28 @@
+<%= form_for [@budget, @payment], html: {class: "form-group"} do |f| %>
+<p>
+  <div class= "row">
+    <div class= "col-md-2">
+      <%= f.label :amount %>
+      <%= f.number_field :amount, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :due_date %>
+      <%= f.date_field :due_date, class: "form-control" %>
+    </div>
+
+    <div class= 'form-group'>
+      <div class= 'col-sm-offset-2 col-sm-10'>
+        <div class= 'checkbox'>
+          <label>
+            <%= f.check_box :paid %> Paid
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit "Update Payment", class: "btn btn-primary" %>
+  </div>
+</p>
+<%end%>
+
+<%= link_to "Cancel", budgets_path, class: 'btn btn-default' %>

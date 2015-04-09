@@ -1,0 +1,31 @@
+<h2><u><%= "#{@budget.vendor.name} Quote"%></u></h2>
+
+<h4><%= "Total Due: $#{@budget.total_due}" %></h4>
+
+<h3>Payments:</h3>
+<%= form_for [@budget, @payment], html: {class: "form-group"} do |f| %>
+<p>
+  <div class= "row">
+    <div class= "col-md-2">
+      <%= f.label :amount %>
+      <%= f.number_field :amount, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :due_date %>
+      <%= f.date_field :due_date, class: "form-control" %>
+    </div>
+    <%= f.submit "Add Payment", class: "btn btn-primary" %>
+  </div>
+</p>
+<%end%>
+
+<% if @budget.payments %>
+  <% @budget.payments.each do |payment| %>
+    <%= "$ #{payment.amount}" %>
+    <%= payment.due_date %>
+    <% if payment.paid %>
+      <%= "PAID" %>
+    <% end %>
+    <%= link_to "Edit", edit_budget_payment_path(budget_id:payment.budget_id, id: payment.id) %>
+  <% end %>
+<% end %>
