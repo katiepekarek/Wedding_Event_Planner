@@ -6,5 +6,6 @@ class User<ActiveRecord::Base
 
   has_many :vendors, :through => :vendors
   has_many :budgets
+  has_one :wedding
 
 end

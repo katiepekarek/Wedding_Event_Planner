@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410053856) do
+ActiveRecord::Schema.define(version: 20150410181933) do
 
   create_table "budgets", force: :cascade do |t|
     t.integer "total_due"
     t.integer "user_id"
     t.string  "bank_website"
     t.integer "vendor_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string  "location"
+    t.time    "start_time"
+    t.text    "notes"
+    t.integer "wedding_id"
+    t.integer "vendor_id"
+    t.date    "date"
+    t.string  "name"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -41,6 +51,11 @@ ActiveRecord::Schema.define(version: 20150410053856) do
     t.text     "additional_info"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "weddings", force: :cascade do |t|
+    t.string  "name"
+    t.integer "user_id"
   end
 
 end

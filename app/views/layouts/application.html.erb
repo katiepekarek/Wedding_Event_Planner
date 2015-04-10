@@ -11,6 +11,12 @@
   <div class='container'>
     <a class='navbar-brand' href='/'>Wedding Event Planner</a>
     <ul class="nav navbar-nav">
+      <% if current_user != nil && current_user.wedding %>
+        <li><%= link_to "Events", wedding_path(current_user.wedding) %></li>
+      <% else %>
+        redirect_to root_path
+        flash[:danger] = "You must create a wedding" 
+      <% end %>
       <li><a href="/vendors">Vendors</a></li>
       <li><a href="/budgets">Budget</a></li>
     </ul>

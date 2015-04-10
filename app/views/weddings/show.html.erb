@@ -1,0 +1,71 @@
+<h1><%= "#{@wedding.name} Wedding Info" %></h1>
+
+<div class= "well">
+  <h4>Add an Event:</h4>
+  <%= form_for [@wedding, @event], html: {class: "form-group"} do |f| %>
+  <div class= "row">
+    <div class= "col-md-2">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :location %>
+      <%= f.text_field :location, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :start_time %>
+      <%= f.time_field :start_time, class: "form-control" %>
+    </div>
+    <div class= "col-md-6">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, class: "form-control" %>
+    </div>
+  </div>
+  <%= f.submit "Add Event", class: "btn btn-primary" %>
+  <%end%>
+</div>
+
+<h3><%= "#{@wedding.name} Events:" %></h3>
+  <% if @wedding.events %>
+    <% @events_by_day.each do |day, event| %>
+      <h4><%= day %></h4>
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Start Time</th>
+          <th>Notes</th>
+          <th>Vendor</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <% event.each do |event| %>
+          <tbody>
+            <td><%= event.name %></td>
+
+            <td><%= event.location %></td>
+
+            <% if event.start_time %>
+              <td><%= event.start_time.strftime( "%l:%M %p" ) %></td>
+            <% else %>
+              <td><%= event.start_time %></td>
+            <% end %>
+
+            <td><%= event.notes %></td>
+
+            <% if event.vendor %>
+              <td><%= link_to "#{event.vendor.name}", vendor_path(event.vendor.id)%></td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <td><%= link_to "Edit", edit_wedding_event_path(wedding_id:event.wedding_id, id: event.id) %></td>
+            <td><%= link_to "Delete", wedding_event_path(wedding_id:event.wedding_id, id: event.id), method: :delete %></td>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
+  <% end %>

@@ -6,5 +6,6 @@ class Vendor < ActiveRecord::Base
 
   has_many :budgets, dependent: :destroy
   has_many :users, through: :budgets
+  has_many :events
 
 end
