@@ -3,8 +3,11 @@
   <%= f.label :total_due %>
   <%= f.number_field :total_due %>
 
+  <%= f.label :bank_website, "Add a Bank Website for Easy Payments" %>
+  <%= f.text_field :bank_website %>
+
   <%= f.submit "#{name_of_button} Quote" %>
 
 <% end %>
 
-<%= link_to "Cancel", budgets_path, class: 'btn btn-default' %>
+<%= link_to "Cancel", vendor_path(@vendor), class: 'btn btn-default' %>

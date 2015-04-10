@@ -4,7 +4,7 @@ class Vendor < ActiveRecord::Base
   validates :contact_person, presence: true
   validates :contact_email, presence: true
 
-  has_many :budgets
+  has_many :budgets, dependent: :destroy
   has_many :users, through: :budgets
 
 end

@@ -23,6 +23,13 @@ class PaymentsController<ApplicationController
     end
   end
 
+  def destroy
+    Payment.find(params[:id]).destroy
+    flash[:success] = 'Payment was successfully deleted'
+
+    redirect_to vendor_budget_path(vendor_id: @budget.vendor_id, id:@budget.id)
+  end
+
   private
 
   def set_budget

@@ -5,7 +5,7 @@ class RegistrationsController<ApplicationController
   end
 
   def create
-    @user = User.new(params.require(:user).permit(:username, :email, :password, :password_confirmation))
+    @user = User.new(params.require(:user).permit(:username, :email, :password, :password_confirmation, :bank_website))
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "You have successfully signed up"

@@ -13,7 +13,7 @@ class VendorsController <ApplicationController
     @vendor = Vendor.new(vendor_params)
     if @vendor.save
 
-      redirect_to vendors_path
+      redirect_to vendor_path(@vendor)
 
     else
       render :new

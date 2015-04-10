@@ -1,31 +1,66 @@
-<h2><u><%= "#{@budget.vendor.name} Quote"%></u></h2>
+<div class= 'page-header'>
+  <p>
+    <h1>
+      <%= "#{@budget.vendor.name} Quote" %>
+      <div class="pull-right">
+        <%= link_to "Edit Quote", edit_vendor_budget_path(@vendor, @budget), class:"btn btn-info" %><%= link_to "Delete",vendor_budget_path(@vendor, @budget), method: :delete, class: "btn btn-danger"%><%= link_to 'Back', vendor_path(@vendor), class: "btn btn-default" %>
+      </div>
+    </h1>
+  </p>
+</div>
 
 <h4><%= "Total Due: $#{@budget.total_due}" %></h4>
 
-<h3>Payments:</h3>
-<%= form_for [@budget, @payment], html: {class: "form-group"} do |f| %>
-<p>
-  <div class= "row">
-    <div class= "col-md-2">
-      <%= f.label :amount %>
-      <%= f.number_field :amount, class: "form-control" %>
-    </div>
-    <div class= "col-md-2">
-      <%= f.label :due_date %>
-      <%= f.date_field :due_date, class: "form-control" %>
-    </div>
-    <%= f.submit "Add Payment", class: "btn btn-primary" %>
-  </div>
-</p>
-<%end%>
 
-<% if @budget.payments %>
-  <% @budget.payments.each do |payment| %>
-    <%= "$ #{payment.amount}" %>
-    <%= payment.due_date %>
-    <% if payment.paid %>
-      <%= "PAID" %>
+<div class= "well">
+  <h4>Add a Payment:</h4>
+    <%= form_for [@budget, @payment], html: {class: "form-group"} do |f| %>
+      <div class= "row">
+        <div class= "col-md-2">
+          <%= f.label :amount %>
+          <%= f.number_field :amount, class: "form-control" %>
+        </div>
+        <div class= "col-md-2">
+          <%= f.label :due_date %>
+          <%= f.date_field :due_date, class: "form-control" %>
+        </div>
+      </div>
+        <%= f.submit "Add Payment", class: "btn btn-primary" %>
+    <%end%>
+</div>
+
+<h3>Payments:</h3>
+<table class="table">
+  <thead>
+    <th>Payment Amount</th>
+    <th>Payment Due Date</th>
+    <th>Payment Status</th>
+    <th></th>
+    <th></th>
+  </thead>
+
+    <% if @budget.payments %>
+      <% @budget.payments.each do |payment| %>
+      <tbody>
+        <td><%= "$ #{payment.amount}" %></td>
+        <% if payment.due_date %>
+          <td><%= payment.due_date.strftime( "%m/%d/%Y" ) %></td>
+        <% else %>
+          <td><%= payment.due_date %></td>
+        <% end %>
+
+        <% if payment.paid %>
+          <td><%= "PAID" %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= link_to "Edit", edit_budget_payment_path(budget_id:payment.budget_id, id: payment.id) %></td>
+        <td><%= link_to "Delete", budget_payment_path(budget_id:payment.budget_id, id: payment.id), method: :delete %></td>
+      <% end %>
+    </tbody>
     <% end %>
-    <%= link_to "Edit", edit_budget_payment_path(budget_id:payment.budget_id, id: payment.id) %>
-  <% end %>
-<% end %>
+
+</table>
+<h4><%= "#{@budget.vendor.name} Quote Balance:"%> <%= "$#{@budget.total_due-payments_sum}" %></h4>
+
+<h4><%= link_to("Make a Payment", @budget.bank_website) %></h4>

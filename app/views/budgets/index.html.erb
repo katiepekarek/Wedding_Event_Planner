@@ -1,5 +1,23 @@
-<%= link_to "New Quote", new_vendor_budget_path(@vendor) %>
+<div class= 'page-header'>
+  <p><h1><%= "Wedding Budget for #{current_user.username}" %> <%= link_to "Add a New Vendor",new_vendor_path, class:"btn btn-info pull-right" %></h1></p>
+</div>
+
+<table class="table">
+  <thead>
+    <th>Vendor Name</th>
+    <th>Vendor Quote</th>
+    <th></th>
+  </thead>
 <% current_user.budgets.each do |budget| %>
-  <%= budget.vendor.name %>
-  <%= budget.total_due %>
+  <tbody>
+    <td><%= link_to "#{budget.vendor.name}", vendor_path(budget.vendor.id) %></td>
+    <td><%= link_to "$#{budget.total_due}", vendor_budget_path(budget.vendor.id, budget)%></td>
+    <td>
+      <%= link_to "Add Vendor Quote", new_vendor_budget_path(budget.vendor.id), class: "btn btn-info"%>
+      <%= link_to "Delete Quote", vendor_budget_path(budget.vendor.id, budget), method: :delete, class: "btn btn-info"%>
+    </td>
+  </tbody>
 <% end %>
+</table>
+
+<h5><%= "Total Wedding Budget: $#{budgets_sum}" %></h5>

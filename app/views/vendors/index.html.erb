@@ -1,15 +1,23 @@
-<h1>Brad and Katie's Wedding Info</h1>
+<div class= 'page-header'>
+  <p><h1><%= "Wedding Vendors for #{current_user.username}" %> <%= link_to "New Vendor", new_vendor_path(@vendor), class:"btn btn-info pull-right" %></h1></p>
+</div>
 
-<%= link_to "New Vendor", new_vendor_path(@vendor)  %><br>
+<table class="table">
+  <thead>
+    <th> Vendor Name </th>
+    <th> Phone Number </th>
+    <th> Contact </th>
+    <th> Email </th>
+    <th> Notes </th>
+  </thead>
 
-<% @vendors.each do |vendor| %>
-
-  <%= link_to vendor.name, vendor_path(vendor) %>
-  <%= vendor.phone_number %>
-  <%= vendor.contact_person %>
-  <%= vendor.contact_email %>
-  <%= vendor.additional_info %>
-
-  <%= link_to 'EDIT', vendor_path(vendor) %>
-
-<%end%>
+  <% @vendors.each do |vendor| %>
+    <tbody>
+      <td><%= link_to vendor.name, vendor_path(vendor) %></td>
+      <td><%= vendor.phone_number %></td>
+      <td><%= vendor.contact_person %></td>
+      <td><%= vendor.contact_email %></td>
+      <td><%= vendor.additional_info %></td>
+    </tbody>
+  <%end%>
+</table>

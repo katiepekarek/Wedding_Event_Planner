@@ -15,5 +15,18 @@ class ApplicationController < ActionController::Base
       redirect_to signin_path
     end
   end
-  
+
+  def payments_sum
+    @budget.payments.reduce(0) { |sum, payment| sum + (payment.paid ? payment.amount : 0) }
+    # condition ? trueval : falseval
+  end
+
+  helper_method :payments_sum
+
+  def budgets_sum
+    current_user.budgets.reduce(0) { |sum, payment| sum + payment.total_due }
+  end
+
+  helper_method :budgets_sum
+
 end
