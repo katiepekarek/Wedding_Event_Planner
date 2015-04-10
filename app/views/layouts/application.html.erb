@@ -9,13 +9,17 @@
 
 <nav class='navbar navbar-inverse navbar-fixed-top'>
   <div class='container'>
-    <a class='navbar-brand' href='/'>Wedding Event Planner</a>
+    <% if current_user != nil && current_user.wedding %>
+      <%= link_to "Wedding Event Planner", wedding_path(current_user.wedding), class: "navbar-brand" %>
+    <% else %>
+     <a class='navbar-brand' href='/'>Wedding Event Planner</a>
+    <% end %>
     <ul class="nav navbar-nav">
       <% if current_user != nil && current_user.wedding %>
         <li><%= link_to "Events", wedding_path(current_user.wedding) %></li>
       <% else %>
         redirect_to root_path
-        flash[:danger] = "You must create a wedding" 
+        flash[:danger] = "You must create a wedding"
       <% end %>
       <li><a href="/vendors">Vendors</a></li>
       <li><a href="/budgets">Budget</a></li>

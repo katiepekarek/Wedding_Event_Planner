@@ -1,0 +1,32 @@
+<div class= "well">
+  <h4>Edit Your Event:</h4>
+  <%= form_for [@wedding, @event], html: {class: "form-group"} do |f| %>
+  <div class= "row">
+    <div class= "col-md-2">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :location %>
+      <%= f.text_field :location, class: "form-control" %>
+    </div>
+    <div class= "col-md-2">
+      <%= f.label :start_time %>
+      <%= f.time_field :start_time, class: "form-control" %>
+    </div>
+    <div class= "col-md-4">
+      <%= f.label :vendor_id, "Vendor" %>
+      <%= f.collection_select(:vendor_id, Vendor.all, :id, :name, {prompt: "Please select a vendor..."}, {class:'form-control'}) %>
+    </div>
+    <div class= "col-md-6">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, class: "form-control" %>
+    </div>
+  </div>
+  <%= f.submit "Update Event", class: "btn btn-primary" %>
+  <%end%>
+</div>

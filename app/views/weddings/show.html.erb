@@ -20,6 +20,10 @@
       <%= f.label :start_time %>
       <%= f.time_field :start_time, class: "form-control" %>
     </div>
+    <div class= "col-md-4">
+      <%= f.label :vendor_id, "Vendor" %>
+      <%= f.collection_select(:vendor_id, Vendor.all, :id, :name, {prompt: "Please select a vendor..."}, {class:'form-control'}) %>
+    </div>
     <div class= "col-md-6">
       <%= f.label :notes %>
       <%= f.text_area :notes, class: "form-control" %>

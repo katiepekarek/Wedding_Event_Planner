@@ -17,7 +17,7 @@ class WeddingsController<ApplicationController
   def show
     @wedding = Wedding.find(params[:id])
     @event = Event.new
-    @events_by_day = @wedding.events.group_by { |event| event.date.strftime("%b %d %Y") }
+    @events_by_day = @wedding.events.order(date: :asc, start_time: :asc).group_by { |event| event.date.strftime("%b %d %Y") }
   end
 
   private
