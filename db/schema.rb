@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150410181933) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "budgets", force: :cascade do |t|
     t.integer "total_due"
     t.integer "user_id"
